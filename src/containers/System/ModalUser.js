@@ -15,10 +15,18 @@ class ModalUser extends Component {
     }
 
     toggle = () => {
+        // Reset state của form khi đóng modal
+        this.setState({
+            email: '',
+            password: '',
+            firstName: '',
+            lastName: '',
+            address: '',
+        });
+
         this.props.toggle(); // Gọi hàm toggle từ prop
     };
 
-    // Hàm xử lý thay đổi dữ liệu của các input
     handleInputChange = (event, id) => {
         let copyState = { ...this.state };
         copyState[id] = event.target.value;
@@ -27,7 +35,7 @@ class ModalUser extends Component {
         });
     };
 
-    checkValideInput = () => {
+    checkValidateInput = () => {
         let isValid = true;
         let arrInput = ['email', 'firstName', 'lastName', 'address'];
         for (let i = 0; i < arrInput.length; i++) {
@@ -37,13 +45,21 @@ class ModalUser extends Component {
             }
         }
         return isValid;
-    }
+    };
 
-    // Hàm này sẽ được gọi khi nhấn nút Add new
     handleAddNewUser = () => {
-        let isValid = this.checkValideInput();
+        let isValid = this.checkValidateInput();
         if (isValid === true) {
             this.props.createNewUser(this.state);
+
+            // Đặt lại state của form sau khi thêm người dùng
+            this.setState({
+                email: '',
+                password: '',
+                firstName: '',
+                lastName: '',
+                address: '',
+            });
         }
     };
 
@@ -64,7 +80,6 @@ class ModalUser extends Component {
                             <input
                                 type='email'
                                 className='form-control'
-                                name='email'
                                 value={this.state.email}
                                 onChange={(event) => this.handleInputChange(event, 'email')}
                             />
@@ -74,7 +89,6 @@ class ModalUser extends Component {
                             <input
                                 type='password'
                                 className='form-control'
-                                name='password'
                                 value={this.state.password}
                                 onChange={(event) => this.handleInputChange(event, 'password')}
                             />
@@ -87,7 +101,6 @@ class ModalUser extends Component {
                             <input
                                 type='text'
                                 className='form-control'
-                                name='firstName'
                                 value={this.state.firstName}
                                 onChange={(event) => this.handleInputChange(event, 'firstName')}
                             />
@@ -97,7 +110,6 @@ class ModalUser extends Component {
                             <input
                                 type='text'
                                 className='form-control'
-                                name='lastName'
                                 value={this.state.lastName}
                                 onChange={(event) => this.handleInputChange(event, 'lastName')}
                             />
@@ -109,7 +121,6 @@ class ModalUser extends Component {
                         <input
                             type='text'
                             className='form-control'
-                            name='address'
                             value={this.state.address}
                             onChange={(event) => this.handleInputChange(event, 'address')}
                         />
