@@ -10,7 +10,6 @@
 
         .left-content {
             width: 25%;
-            border: 1px solid red;
             display: flex;
             align-items: center;
 
@@ -32,7 +31,6 @@
 
         .center-content {
             width: 50%;
-            border: 1px solid purple;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -49,10 +47,36 @@
 
         .right-content {
             width: 25%;
-            border: 1px solid orange;
             display: flex;
             justify-content: center;
             align-items: center;
+
+            .support {
+                padding-right: 50px;
+                display: flex;
+                align-items: center;
+                cursor: pointer;
+            }
+
+            .language-vi {
+                cursor: pointer;
+                opacity: 0.2;
+
+                &.active {
+                    opacity: 1;
+                }
+            }
+
+            .language-en {
+                margin-left: 10px;
+                cursor: pointer;
+                opacity: 0.2;
+
+                &.active {
+                    opacity: 1;
+                }
+            }
+
         }
     }
 }
