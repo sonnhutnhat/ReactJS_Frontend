@@ -4,33 +4,34 @@ import { FormattedMessage } from 'react-intl';
 
 import Slider from 'react-slick';
 
-class Specialty extends Component {
+
+class HandBook extends Component {
 
     render() {
 
         return (
-            <div className='section-share section-specialty'>
+            <div className='section-share section-handbook'>
                 <div className='section-container'>
                     <div className='section-header'>
-                        <span className='section-title'>Chuyên khoa phổ biến</span>
+                        <span className='section-title'>Cẩm nang</span>
                         <button className='btn-section'>Xem thêm</button>
                     </div>
                     <div className='section-body'>
                         <Slider {...this.props.settings}>
                             <div className='section-customize'>
-                                <div className='bg-img section-specialty' />
+                                <div className='bg-img section-handbook' />
                                 <div>Tai Mũi Họng</div>
                             </div>
                             <div className='section-customize'>
-                                <div className='bg-img section-specialty' />
+                                <div className='bg-img section-handbook' />
                                 <div>Cột sống</div>
                             </div>
                             <div className='section-customize'>
-                                <div className='bg-img section-specialty' />
+                                <div className='bg-img section-handbook' />
                                 <div>Y học Cổ truyền</div>
                             </div>
                             <div className='section-customize'>
-                                <div className='bg-img section-specialty' />
+                                <div className='bg-img section-handbook' />
                                 <div>Chăm cứu</div>
                             </div>
                         </Slider>
@@ -53,4 +54,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Specialty);
+export default connect(mapStateToProps, mapDispatchToProps)(HandBook);
