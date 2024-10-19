@@ -1,0 +1,71 @@
+.section-specialty {
+    height: auto;
+    background: #f5f5f5;
+    border-top: 1px solid red;
+
+
+    .specialty-container {
+        margin: 0 100px;
+        display: flex;
+        flex-direction: column;
+
+        .specialty-header {
+            height: 60px;
+            margin-bottom: 30px;
+            padding-top: 30px;
+
+            .section-title {
+                font-size: 22px;
+                font-weight: 600;
+            }
+
+            .btn-section {
+                float: right;
+                padding: 10px 20px;
+                border: none;
+                outline: none;
+                display: block;
+                background: #eb7c00;
+                text-transform: uppercase;
+                color: white;
+                cursor: pointer;
+                text-decoration: none;
+
+                &:hover {
+                    color: #fff;
+                    background: #f7d800;
+                }
+            }
+        }
+
+        .specialty-body {
+            .specialty-customize {
+                .bg-img {
+                    height: 150px;
+                    width: 278px;
+                    background: url('../../../assets/specialty/anh.jpeg') center center no-repeat;
+                    background-size: cover;
+                    background-repeat: no-repeat;
+                    background-position: center;
+                }
+
+            }
+        }
+    }
+}
+
+
+//reset slick slider
+.slick-prev:before,
+.slick-next:before {
+    font-size: 50px !important;
+    width: 20px; // Kích thước nút
+    height: 20px; // Chiều cao nút
+    border-radius: 50%; // Làm cho nút tròn
+    background-color: rgba(239, 213, 213, 0.8); // Nền trắng với độ trong suốt
+    color: rgb(215, 209, 209) !important;
+    display: flex; // Sử dụng flexbox để căn giữa nội dung
+    align-items: center; // Căn giữa theo chiều dọc
+    justify-content: center; // Căn giữa theo chiều ngang
+    z-index: 1; // Đảm bảo nút nằm trên cùng
+}
