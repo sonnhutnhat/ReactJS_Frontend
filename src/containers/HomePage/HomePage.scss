@@ -1,6 +1,19 @@
+// Common variables
+$bg-gray: #f5f5f5;
+$primary-orange: #eb7c00;
+$hover-yellow: #f7d800;
+
 .section-share {
-    &.section-specialty {
-        background-color: #f5f5f5;
+
+    // Common section backgrounds
+    &.section-specialty,
+    &.section-about,
+    &.section-outstanding-doctor {
+        background-color: $bg-gray;
+    }
+
+    &.section-about {
+        border: 1px solid red;
     }
 
     height: 350px;
@@ -27,14 +40,14 @@
                 padding: 10px 20px;
                 border: none;
                 outline: none;
-                background: #eb7c00;
+                background: $primary-orange;
                 text-transform: uppercase;
                 color: white;
                 cursor: pointer;
                 border-radius: 4px;
 
                 &:hover {
-                    background: #f7d800;
+                    background: $hover-yellow;
                 }
             }
         }
@@ -47,10 +60,13 @@
                 .bg-img {
                     height: 150px;
                     width: 278px;
-                    background-position: center center;
-                    background-repeat: no-repeat;
-                    background-size: cover;
-                    background-color: #eee;
+
+                    background: {
+                        position: center center;
+                        repeat: no-repeat;
+                        size: cover;
+                        color: #eee;
+                    }
 
                     &.section-specialty {
                         background-image: url('../../assets/specialty/anh.jpeg');
@@ -63,15 +79,14 @@
                     &.section-handbook {
                         background-image: url('../../assets/handbook/handbook.jfif');
                     }
-
                 }
             }
         }
     }
 
-    // Styles riêng cho section bác sĩ nổi bật
+    // Outstanding doctor section
     &.section-outstanding-doctor {
-        background: #f5f5f5;
+        background: $bg-gray;
 
         .section-customize {
             .outer-bg {
@@ -83,9 +98,12 @@
                     width: 120px;
                     height: 120px;
                     border-radius: 50%;
-                    background-size: cover;
-                    background-repeat: no-repeat;
-                    background-position: center;
+
+                    background: {
+                        size: cover;
+                        repeat: no-repeat;
+                        position: center;
+                    }
 
                     &.section-outstanding-doctor {
                         background-image: url('../../assets/outstanding-doctor/doctor.jfif');
@@ -97,16 +115,18 @@
                 text-align: center;
                 padding: 5px;
 
-                div:first-child {
-                    font-size: 14px;
-                    font-weight: bold;
-                    color: #333;
-                }
+                div {
+                    &:first-child {
+                        font-size: 14px;
+                        font-weight: bold;
+                        color: #333;
+                    }
 
-                div:last-child {
-                    font-size: 12px;
-                    color: #555;
-                    margin-top: 5px;
+                    &:last-child {
+                        font-size: 12px;
+                        color: #555;
+                        margin-top: 5px;
+                    }
                 }
             }
 
@@ -119,31 +139,58 @@
     }
 }
 
-// Styles cho slider buttons
-.slick-prev {
-    left: -20px !important;
-    z-index: 1000 !important;
+.section-about {
+    padding: 0 100px;
+    background: $bg-gray;
+    height: 500px !important;
+    border: 1px solid red;
+
+    .section-about-header {
+        padding: 20px 10px;
+        font-size: 22px;
+        font-weight: 600;
+    }
+
+    .section-about-content {
+        display: flex;
+        gap: 15px;
+        width: 100%;
+
+        .content-left {
+            width: 50%;
+        }
+
+        .content-right {
+            width: 50%;
+
+            p {
+                text-align: justify;
+                font-style: italic;
+            }
+        }
+    }
+}
+
+// Slider controls
+.slick-prev,
+.slick-next {
     height: 48px !important;
     width: 44px !important;
     background: #fff !important;
     border: 2px solid #d7d7d7 !important;
+    z-index: 1000 !important;
 
     &:hover {
         background: #eceaea !important;
     }
 }
 
+.slick-prev {
+    left: -20px !important;
+}
+
 .slick-next {
     right: -20px !important;
-    z-index: 1000 !important;
-    height: 48px !important;
-    width: 44px !important;
-    background: #fff !important;
-    border: 2px solid #d7d7d7 !important;
-
-    &:hover {
-        background: #eceaea !important;
-    }
 }
 
 .slick-prev:before,
@@ -151,4 +198,105 @@
     font-family: FontAwesome !important;
     color: #d7d7d7 !important;
     line-height: 46px !important;
+}
+
+// Footer styles
+.home-footer {
+    background-color: #f8f9fa;
+    color: #6c757d;
+
+    .social-section {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem;
+        border-bottom: 1px solid #dee2e6;
+
+        .social-text {
+            @media (max-width: 992px) {
+                display: none;
+            }
+        }
+
+        .social-links {
+            .social-link {
+                margin-right: 1rem;
+                color: #6c757d;
+                text-decoration: none;
+
+                &:hover {
+                    color: #454545;
+                }
+
+                i {
+                    font-size: 1.25rem;
+                }
+            }
+        }
+    }
+
+    .main-footer {
+        padding: 3rem 0;
+
+        .footer-container {
+            width: 100%;
+            padding-right: 15px;
+            padding-left: 15px;
+            margin-right: auto;
+            margin-left: auto;
+            max-width: 1140px;
+
+            .footer-content {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 2rem;
+
+                .footer-section {
+                    .footer-title {
+                        text-transform: uppercase;
+                        font-weight: bold;
+                        margin-bottom: 1rem;
+
+                        i {
+                            margin-right: 0.5rem;
+                        }
+                    }
+
+                    p {
+                        margin-bottom: 0.5rem;
+
+                        a {
+                            color: #6c757d;
+                            text-decoration: none;
+
+                            &:hover {
+                                color: #454545;
+                            }
+                        }
+
+                        i {
+                            margin-right: 0.5rem;
+                            width: 16px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .copyright {
+        text-align: center;
+        padding: 1rem;
+        background-color: rgba(0, 0, 0, 0.05);
+
+        a {
+            color: #6c757d;
+            text-decoration: none;
+            font-weight: bold;
+
+            &:hover {
+                color: #454545;
+            }
+        }
+    }
 }

@@ -18,10 +18,15 @@ class Header extends Component {
                     <Navigator menus={adminMenu} />
                 </div>
 
-                {/* nút logout */}
-                <div className="btn btn-logout" onClick={processLogout}>
-                    <i className="fas fa-sign-out-alt"></i>
+                <div className='languages'>
+                    <span className='language-vi'>VN</span>
+                    <span className='language-en'>EN</span>
+                    {/* nút logout */}
+                    <div className="btn btn-logout" onClick={processLogout} title='Log out'>
+                        <i className="fas fa-sign-out-alt"></i>
+                    </div>
                 </div>
+
             </div>
         );
     }
