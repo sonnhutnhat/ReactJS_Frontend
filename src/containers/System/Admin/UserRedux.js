@@ -15,7 +15,17 @@ class UserRedux extends Component {
             positionArr: [],
             roleArr: [],
             previewImgURL: '',
-            isOpen: false
+            isOpen: false,
+            email: '',
+            password: '',
+            firstName: '',
+            lastName: '',
+            phoneNumber: '',
+            address: '',
+            gender: '',
+            position: '',
+            role: '',
+            avatar: ''
         }
     }
 
@@ -23,23 +33,13 @@ class UserRedux extends Component {
         this.props.getGenderStart();
         this.props.getPositionStart();
         this.props.getRoleStart();
-        // try {
-        //     let res = await getAllCodeService('gender');
-        //     if (res && res.errCode === 0) {
-        //         this.setState({
-        //             genderArr: res.data
-        //         })
-        //     }
-        //     console.log('aaa', res)
-        // } catch (e) {
-        //     console.log(e);
-        // }
     }
 
     handleOnChangeInput = (event) => {
         this.setState({
             [event.target.name]: event.target.value
         });
+        console.log('value', this.state)
     }
 
     handleOnChangeImage = (event) => {
@@ -48,7 +48,8 @@ class UserRedux extends Component {
         if (file) {
             const objectUrl = URL.createObjectURL(file)
             this.setState({
-                previewImgURL: objectUrl
+                previewImgURL: objectUrl,
+                avatar: file
             })
         }
     }
@@ -60,8 +61,40 @@ class UserRedux extends Component {
     }
 
     handleSaveUser = () => {
-        console.log('Current state:', this.state);
-        // Add your save logic here
+        let isValid = this.checkValidateInput();
+        if (isValid === false) return;
+
+        // Tạo object data mà không bao gồm password để log
+        const dataToLog = {
+            email: this.state.email,
+            firstName: this.state.firstName,
+            lastName: this.state.lastName,
+            address: this.state.address,
+            phonenumber: this.state.phoneNumber,
+            gender: this.state.gender,
+            roleId: this.state.role,
+            positonID: this.state.position
+        };
+
+        console.log('Current state:', dataToLog); // Log data không có password
+
+        // Vẫn gửi đầy đủ data bao gồm password tới action
+        this.props.createNewUser({
+            ...dataToLog,
+            password: this.state.password
+        });
+    }
+    checkValidateInput = () => {
+        let isValid = true;
+        let arrFields = ['email', 'password', 'firstName', 'lastName', 'phoneNumber', 'address', 'gender', 'position', 'role'];
+        for (let i = 0; i < arrFields.length; i++) {
+            if (!this.state[arrFields[i]]) {
+                isValid = false;
+                alert('this input emty' + arrFields[i])
+                break;
+            }
+        }
+        return isValid;
     }
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (prevProps.genderRedux !== this.props.genderRedux) {
@@ -164,15 +197,16 @@ class UserRedux extends Component {
                                     value={this.state.gender}
                                     onChange={this.handleOnChangeInput}
                                 >
+                                    <option value="">Choose...</option>
                                     {genderArr && genderArr.length > 0 &&
                                         genderArr.map((item, index) => {
                                             return (
-                                                <option key={index}>{language === languages.VI ? item.valueVi : item.valueEn}</option>
-
+                                                <option key={index} value={item.key}>
+                                                    {language === languages.VI ? item.valueVi : item.valueEn}
+                                                </option>
                                             )
                                         })
                                     }
-
                                 </select>
                             </div>
                             {/* Position Select */}
@@ -189,7 +223,7 @@ class UserRedux extends Component {
                                     {positionArr && positionArr.length > 0 &&
                                         positionArr.map((item, index) => {
                                             return (
-                                                <option key={index} value={item.keyMap}>
+                                                <option key={index} value={item.key}>
                                                     {language === languages.VI ? item.valueVi : item.valueEn}
                                                 </option>
                                             )
@@ -212,7 +246,7 @@ class UserRedux extends Component {
                                     {roleArr && roleArr.length > 0 &&
                                         roleArr.map((item, index) => {
                                             return (
-                                                <option key={index} value={item.keyMap}>
+                                                <option key={index} value={item.key}>
                                                     {language === languages.VI ? item.valueVi : item.valueEn}
                                                 </option>
                                             )
@@ -278,7 +312,8 @@ const mapDispatchToProps = dispatch => {
     return {
         getGenderStart: () => dispatch(actions.fetchGenderStart()),
         getPositionStart: () => dispatch(actions.fetchPositionStart()),
-        getRoleStart: () => dispatch(actions.fetchRoleStart())
+        getRoleStart: () => dispatch(actions.fetchRoleStart()),
+        createNewUser: (data) => dispatch(actions.createNewUser(data))
     };
 };
 
